@@ -1,0 +1,6 @@
+node_modules
+dist
+.pixelforge
+workspaces
+coverage
+*.log

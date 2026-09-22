@@ -1,0 +1,52 @@
+{
+  "name": "pixelforge",
+  "version": "1.0.0",
+  "description": "Autonomous Pixel-Perfect Website Reverse-Engineering & Cloning Platform",
+  "main": "dist/backend/index.js",
+  "type": "module",
+  "bin": {
+    "pixelforge": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "tsx watch src/backend/server.ts",
+    "dev:frontend": "vite",
+    "build": "tsc && vite build",
+    "start": "node dist/backend/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "lucide-react": "^0.475.0",
+    "openai": "^4.85.3",
+    "pixelmatch": "^7.1.0",
+    "playwright": "^1.50.1",
+    "pngjs": "^7.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.5"
+  },
+  "devDependencies": {
+    "@types/archiver": "^6.0.3",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "commander": "^13.1.0",
+    "concurrently": "^9.1.2",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5"
+  }
+}
