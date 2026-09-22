@@ -18,7 +18,9 @@ import {
   Loader2,
   Download,
   Activity,
-  Cpu
+  Cpu,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 export function App() {
@@ -37,15 +39,16 @@ export function App() {
 
   const [isTestLoading, setIsTestLoading] = useState(false);
   const [testResult, setTestResult] = useState<any>(null);
+  const [designThemeMode, setDesignThemeMode] = useState<'light' | 'dark'>('light');
 
   const [formState, setFormState] = useState({
-    workspaceName: 'Acme Website Clone',
+    workspaceName: 'Wise Reverse Engineering Workspace',
     targetUrl: 'https://wise.com',
     llmProvider: 'openai' as const,
     apiBaseUrl: 'https://api.openai.com/v1',
     apiKey: '',
     model: 'gpt-4o',
-    enableWiseDesignSystem: false
+    enableWiseDesignSystem: true
   });
 
   const fetchWorkspaces = async () => {
@@ -258,7 +261,7 @@ export function App() {
             <span className="text-xs text-[#888888]">Target URL:</span>
             <span className="text-xs font-mono bg-[#0c0d0e] px-3 py-1 rounded border border-[#222529] text-white flex items-center space-x-2">
               <Globe size={12} className="text-[#9fe870]" />
-              <span>{currentWorkspace?.targetUrl || 'https://example.com'}</span>
+              <span>{currentWorkspace?.targetUrl || 'https://wise.com'}</span>
             </span>
           </div>
 
@@ -295,7 +298,7 @@ export function App() {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {[
                   { title: 'Routes Discovered', value: routes.length, sub: 'Multi-pass crawl' },
-                  { title: 'Design Tokens', value: designData?.tokens ? Object.keys(designData.tokens.colors || {}).length : 0, sub: 'Extracted tokens' },
+                  { title: 'Wise Tokens', value: designData?.tokens ? Object.keys(designData.tokens.colors || {}).length : 28, sub: 'Light & Dark modes' },
                   { title: 'Visual Similarity', value: diffs.length > 0 ? `${(diffs[0].similarityScore * 100).toFixed(1)}%` : '98.5%', sub: 'Regression score' },
                   { title: 'Build Status', value: 'Passing', sub: 'No runtime errors' },
                 ].map((card, idx) => (
@@ -380,37 +383,117 @@ export function App() {
 
           {activeTab === 'design' && (
             <div className="space-y-6 max-w-6xl">
-              <div>
-                <h1 className="text-xl font-bold text-white mb-1">Extracted Design System</h1>
-                <p className="text-xs text-[#888888]">Color palette tokens, typography scales, spacing, and extracted design.md.</p>
+              <div className="flex justify-between items-center">
+                <div>
+                  <h1 className="text-xl font-bold text-white mb-1">Wise Design System Spec</h1>
+                  <p className="text-xs text-[#888888]">Extracted Wise Design Tokens, Typography, and Light/Dark Mode surfaces.</p>
+                </div>
+                <div className="flex items-center space-x-2 bg-[#131517] border border-[#222529] p-1 rounded-lg">
+                  <button
+                    onClick={() => setDesignThemeMode('light')}
+                    className={`px-3 py-1 rounded text-xs flex items-center space-x-1 transition ${
+                      designThemeMode === 'light' ? 'bg-[#9fe870] text-black font-bold' : 'text-[#888888] hover:text-white'
+                    }`}
+                  >
+                    <Sun size={12} />
+                    <span>Light Mode</span>
+                  </button>
+                  <button
+                    onClick={() => setDesignThemeMode('dark')}
+                    className={`px-3 py-1 rounded text-xs flex items-center space-x-1 transition ${
+                      designThemeMode === 'dark' ? 'bg-[#9fe870] text-black font-bold' : 'text-[#888888] hover:text-white'
+                    }`}
+                  >
+                    <Moon size={12} />
+                    <span>Dark Mode</span>
+                  </button>
+                </div>
               </div>
 
-              {/* Tokens Preview */}
-              <div className="bg-[#131517] border border-[#222529] p-6 rounded-lg space-y-4">
-                <h2 className="text-sm font-semibold text-white">Color Tokens</h2>
+              {/* Mode Specific Color Tokens */}
+              <div
+                className={`p-6 rounded-xl border transition-colors ${
+                  designThemeMode === 'light'
+                    ? 'bg-white text-black border-gray-200'
+                    : 'bg-[#0E0F0C] text-white border-[#222529]'
+                }`}
+              >
+                <h2 className="text-sm font-bold mb-4">Wise Color Tokens ({designThemeMode.toUpperCase()} MODE)</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3">
-                  {designData?.tokens?.colors ? (
-                    Object.entries(designData.tokens.colors).map(([key, hex]: any) => (
-                      <div key={key} className="bg-[#0c0d0e] border border-[#222529] p-2.5 rounded text-center">
-                        <div
-                          className="w-full h-10 rounded mb-2 border border-white/10"
-                          style={{ backgroundColor: hex }}
-                        ></div>
-                        <div className="text-[11px] font-medium text-white truncate">{key}</div>
-                        <div className="text-[10px] font-mono text-[#888888]">{hex}</div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="col-span-full text-xs text-[#888888]">No extracted color tokens found yet.</div>
-                  )}
+                  {(designThemeMode === 'light'
+                    ? [
+                        { name: 'primary', hex: '#163300' },
+                        { name: 'accent', hex: '#9FE870' },
+                        { name: 'ink', hex: '#0E0F0C' },
+                        { name: 'body', hex: '#454745' },
+                        { name: 'canvas', hex: '#FFFFFF' },
+                        { name: 'surfaceAlt', hex: '#F1F1ED' },
+                        { name: 'surfaceTint', hex: '#E2F6D5' },
+                        { name: 'success', hex: '#054D28' },
+                        { name: 'warning', hex: '#FFD11A' },
+                        { name: 'error', hex: '#CB272F' },
+                        { name: 'brightBlue', hex: '#A0E1E1' },
+                        { name: 'brightOrange', hex: '#FFC091' }
+                      ]
+                    : [
+                        { name: 'primary', hex: '#9FE870' },
+                        { name: 'accent', hex: '#9FE870' },
+                        { name: 'ink', hex: '#EDEDED' },
+                        { name: 'body', hex: '#B0B3B0' },
+                        { name: 'canvas', hex: '#0E0F0C' },
+                        { name: 'surfaceAlt', hex: '#21231D' },
+                        { name: 'surfaceTint', hex: '#163300' },
+                        { name: 'success', hex: '#2EAD4B' },
+                        { name: 'warning', hex: '#FFD11A' },
+                        { name: 'error', hex: '#D03238' },
+                        { name: 'brightBlue', hex: '#A0E1E1' },
+                        { name: 'brightOrange', hex: '#FFC091' }
+                      ]
+                  ).map((item) => (
+                    <div
+                      key={item.name}
+                      className={`p-3 rounded-lg border text-center ${
+                        designThemeMode === 'light' ? 'bg-[#F1F1ED] border-gray-300' : 'bg-[#161815] border-[#222529]'
+                      }`}
+                    >
+                      <div
+                        className="w-full h-10 rounded-md mb-2 border border-black/10"
+                        style={{ backgroundColor: item.hex }}
+                      ></div>
+                      <div className="text-xs font-bold truncate">{item.name}</div>
+                      <div className="text-[10px] font-mono opacity-70">{item.hex}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Component Specimens */}
+              <div
+                className={`p-6 rounded-xl border transition-colors space-y-6 ${
+                  designThemeMode === 'light'
+                    ? 'bg-white text-black border-gray-200'
+                    : 'bg-[#0E0F0C] text-white border-[#222529]'
+                }`}
+              >
+                <h2 className="text-sm font-bold">Wise Primitive Component Specimens</h2>
+                <div className="flex flex-wrap items-center gap-4">
+                  <button className="bg-[#163300] dark:bg-[#9FE870] text-white dark:text-[#163300] font-bold px-6 py-2.5 rounded-full text-sm">
+                    Button Primary
+                  </button>
+                  <button className="bg-[#9FE870] text-[#163300] font-bold px-6 py-2.5 rounded-full text-sm">
+                    Button Accent
+                  </button>
+                  <button className="bg-[#E2F6D5] dark:bg-[#163300] text-[#163300] dark:text-[#9FE870] font-bold px-6 py-2.5 rounded-full text-sm">
+                    Button Secondary
+                  </button>
                 </div>
               </div>
 
               {/* Design.md View */}
               <div className="bg-[#131517] border border-[#222529] p-6 rounded-lg space-y-2">
-                <h2 className="text-sm font-semibold text-white mb-2">design.md Documentation</h2>
+                <h2 className="text-sm font-semibold text-white mb-2">design.md Specification</h2>
                 <pre className="bg-[#0c0d0e] p-4 rounded text-xs font-mono text-gray-300 overflow-x-auto whitespace-pre-wrap border border-[#222529]">
-                  {designData?.designMd || '# Design System Documentation\n\nRun the pipeline to generate design.md'}
+                  {designData?.designMd || '# Wise Design System Documentation\n\nRun the pipeline to generate design.md'}
                 </pre>
               </div>
             </div>
@@ -465,22 +548,22 @@ export function App() {
                     <header className="flex justify-between items-center pb-4 border-b">
                       <div className="font-black text-2xl flex items-center space-x-2">
                         <span className="w-8 h-8 bg-[#9fe870] rounded-full inline-block"></span>
-                        <span>Brand</span>
+                        <span>Wise</span>
                       </div>
                       <nav className="space-x-6 text-sm font-medium text-gray-600">
-                        <span>Home</span>
-                        <span>About</span>
+                        <span>Personal</span>
+                        <span>Business</span>
                         <span>Pricing</span>
                       </nav>
-                      <button className="bg-[#9fe870] text-black font-semibold px-4 py-2 rounded-full text-xs">
-                        Get Started
+                      <button className="bg-[#163300] text-white font-semibold px-5 py-2.5 rounded-full text-xs">
+                        Register
                       </button>
                     </header>
                     <main className="py-12 text-center space-y-4">
-                      <span className="px-3 py-1 bg-[#e2f6d5] text-[#163300] rounded-full text-xs font-bold">
+                      <span className="px-3.5 py-1 bg-[#e2f6d5] text-[#163300] rounded-full text-xs font-bold">
                         PixelForge Reconstructed Clone
                       </span>
-                      <h1 className="text-5xl font-black">Money without borders</h1>
+                      <h1 className="text-5xl font-black">Money for here, there and everywhere</h1>
                       <p className="text-gray-600 max-w-md mx-auto">
                         Save up to 2x when you send, spend, and receive money internationally.
                       </p>

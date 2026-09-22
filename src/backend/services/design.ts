@@ -2,162 +2,183 @@ import fs from 'fs';
 import path from 'path';
 import { DesignTokens } from '../../shared/types.js';
 
-export const WISE_TOKENS_CSS = `/* Wise Design System Tokens */
+export const WISE_TOKENS_CSS = `/* Wise Design System Tokens (Light & Dark Modes) */
 :root {
-  --colors-primary: #9fe870;
-  --colors-primary-active: #cdffad;
-  --colors-primary-neutral: #c5edab;
-  --colors-primary-pale: #e2f6d5;
-  --colors-canvas: #ffffff;
-  --colors-canvas-soft: #e8ebe6;
-  --colors-ink: #0e0f0c;
-  --colors-ink-deep: #163300;
+  /* Colors - Light Mode */
+  --colors-primary: #163300;
+  --colors-accent: #9FE870;
+  --colors-accent-hover: #80E142;
+  --colors-accent-pressed: #65CF21;
+  --colors-ink: #0E0F0C;
   --colors-body: #454745;
-  --colors-mute: #868685;
-  --colors-positive: #2ead4b;
-  --colors-positive-deep: #054d28;
-  --colors-warning: #ffd11a;
-  --colors-warning-deep: #b86700;
-  --colors-warning-content: #4a3b1c;
-  --colors-negative: #d03238;
-  --colors-negative-deep: #a72027;
-  --colors-negative-darkest: #a7000d;
-  --colors-negative-bg: #320707;
-  --colors-accent-orange: #ffc091;
-  --colors-accent-cyan: #38c8ff;
-  --colors-on-primary: #0e0f0c;
+  --colors-muted: #6A6C6A;
+  --colors-canvas: #FFFFFF;
+  --colors-surface: #FFFFFF;
+  --colors-surface-alt: #F1F1ED;
+  --colors-surface-tint: #E2F6D5;
+  --colors-border: rgba(14, 15, 12, 0.12157);
+  --colors-border-strong: #CACFC7;
+  --colors-link: #163300;
+  --colors-success: #054D28;
+  --colors-warning: #FFD11A;
+  --colors-error: #CB272F;
+  --colors-bright-green: #9FE870;
+  --colors-forest-green: #163300;
+  --colors-forest-green-hover: #0D1F00;
+  --colors-forest-green-pressed: #0E0F0C;
+  --colors-bright-blue: #A0E1E1;
+  --colors-bright-yellow: #FFEB69;
+  --colors-bright-orange: #FFC091;
+  --colors-bright-pink: #FFD7EF;
+  --colors-dark-charcoal: #21231D;
+  --colors-celebration-bg: #ECF9F9;
+  --colors-celebration-text: #0B4C72;
+  --colors-on-primary: #FFFFFF;
+  --colors-on-accent: #163300;
+  --colors-on-dark: #9FE870;
 
-  --typography-display-mega-size: 126px;
-  --typography-display-mega-weight: 900;
-  --typography-display-mega-line-height: 107.1px;
-  --typography-display-xxl-size: 96px;
-  --typography-display-xxl-weight: 900;
-  --typography-display-xxl-line-height: 81.6px;
-  --typography-display-xl-size: 64px;
-  --typography-display-xl-weight: 900;
-  --typography-display-xl-line-height: 54.4px;
-  --typography-display-lg-size: 47px;
-  --typography-display-lg-weight: 400;
-  --typography-display-lg-line-height: 70.5px;
-  --typography-display-md-size: 40px;
-  --typography-display-md-weight: 900;
-  --typography-display-md-line-height: 34px;
-  --typography-display-sm-size: 32px;
-  --typography-display-sm-weight: 600;
-  --typography-display-sm-line-height: 38.4px;
-  --typography-display-xs-size: 24px;
-  --typography-display-xs-weight: 600;
-  --typography-display-xs-line-height: 31.2px;
+  /* Typography */
+  --typography-display-font: "Wise Sans", "Inter", sans-serif;
+  --typography-body-font: "Inter", Helvetica, Arial, sans-serif;
 
-  --typography-body-lg-size: 20px;
-  --typography-body-lg-weight: 400;
-  --typography-body-lg-line-height: 30px;
-  --typography-body-md-size: 16px;
-  --typography-body-md-weight: 400;
-  --typography-body-md-line-height: 24px;
-  --typography-body-md-strong-size: 16px;
-  --typography-body-md-strong-weight: 600;
-  --typography-body-md-strong-line-height: 24px;
-  --typography-body-sm-size: 14px;
-  --typography-body-sm-weight: 400;
-  --typography-body-sm-line-height: 20px;
-  --typography-body-sm-strong-size: 14px;
-  --typography-body-sm-strong-weight: 600;
-  --typography-body-sm-strong-line-height: 20px;
-  --typography-caption-size: 12px;
-  --typography-caption-weight: 400;
-  --typography-caption-line-height: 16px;
-  --typography-button-md-size: 16px;
-  --typography-button-md-weight: 600;
-  --typography-button-md-line-height: 24px;
+  /* Radii */
+  --rounded-sm: 10px;
+  --rounded-md: 16px;
+  --rounded-lg: 24px;
+  --rounded-xl: 32px;
+  --rounded-pill: 9999px;
 
-  --spacing-xxs: 2px;
+  /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 24px;
-  --spacing-2xl: 32px;
-  --spacing-3xl: 48px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 56px;
+  --spacing-section: 96px;
+}
 
-  --rounded-none: 0px;
-  --rounded-sm: 8px;
-  --rounded-md: 12px;
-  --rounded-lg: 16px;
-  --rounded-xl: 24px;
-  --rounded-pill: 9999px;
-  --rounded-full: 9999px;
+.dark {
+  /* Colors - Dark Mode */
+  --colors-primary: #9FE870;
+  --colors-accent: #9FE870;
+  --colors-accent-hover: #80E142;
+  --colors-accent-pressed: #65CF21;
+  --colors-ink: #EDEDED;
+  --colors-body: #B0B3B0;
+  --colors-muted: #888A88;
+  --colors-canvas: #0E0F0C;
+  --colors-surface: #161815;
+  --colors-surface-alt: #21231D;
+  --colors-surface-tint: #163300;
+  --colors-border: rgba(255, 255, 255, 0.15);
+  --colors-border-strong: #454745;
+  --colors-link: #9FE870;
+  --colors-success: #2EAD4B;
+  --colors-warning: #FFD11A;
+  --colors-error: #D03238;
+  --colors-celebration-bg: #162C38;
+  --colors-celebration-text: #A0E1E1;
+  --colors-on-primary: #0E0F0C;
+  --colors-on-accent: #163300;
+  --colors-on-dark: #9FE870;
 }
 `;
 
 export const WISE_TOKENS_JSON = {
+  version: 'alpha',
+  name: 'Wise',
+  slug: 'wise',
+  source: 'https://wise.com/',
   colors: {
-    primary: '#9fe870',
-    primaryActive: '#cdffad',
-    primaryNeutral: '#c5edab',
-    primaryPale: '#e2f6d5',
-    canvas: '#ffffff',
-    canvasSoft: '#e8ebe6',
-    ink: '#0e0f0c',
-    inkDeep: '#163300',
+    primary: '#163300',
+    accent: '#9FE870',
+    accentHover: '#80E142',
+    accentPressed: '#65CF21',
+    ink: '#0E0F0C',
     body: '#454745',
-    mute: '#868685',
-    positive: '#2ead4b',
-    positiveDeep: '#054d28',
-    warning: '#ffd11a',
-    warningDeep: '#b86700',
-    warningContent: '#4a3b1c',
-    negative: '#d03238',
-    negativeDeep: '#a72027',
-    negativeDarkest: '#a7000d',
-    negativeBg: '#320707',
-    accentOrange: '#ffc091',
-    accentCyan: '#38c8ff',
-    onPrimary: '#0e0f0c'
+    muted: '#6A6C6A',
+    canvas: '#FFFFFF',
+    surface: '#FFFFFF',
+    surfaceAlt: '#F1F1ED',
+    surfaceTint: '#E2F6D5',
+    border: 'rgba(14,15,12,0.12157)',
+    borderStrong: '#CACFC7',
+    link: '#163300',
+    success: '#054D28',
+    warning: '#FFD11A',
+    error: '#CB272F',
+    brightGreen: '#9FE870',
+    forestGreen: '#163300',
+    forestGreenHover: '#0D1F00',
+    forestGreenPressed: '#0E0F0C',
+    brightBlue: '#A0E1E1',
+    brightYellow: '#FFEB69',
+    brightOrange: '#FFC091',
+    brightPink: '#FFD7EF',
+    darkCharcoal: '#21231D',
+    celebrationBg: '#ECF9F9',
+    celebrationText: '#0B4C72',
+    onPrimary: '#FFFFFF',
+    onAccent: '#163300',
+    onDark: '#9FE870'
+  },
+  darkModeColors: {
+    primary: '#9FE870',
+    accent: '#9FE870',
+    accentHover: '#80E142',
+    accentPressed: '#65CF21',
+    ink: '#EDEDED',
+    body: '#B0B3B0',
+    muted: '#888A88',
+    canvas: '#0E0F0C',
+    surface: '#161815',
+    surfaceAlt: '#21231D',
+    surfaceTint: '#163300',
+    border: 'rgba(255,255,255,0.15)',
+    borderStrong: '#454745',
+    link: '#9FE870',
+    success: '#2EAD4B',
+    warning: '#FFD11A',
+    error: '#D03238',
+    celebrationBg: '#162C38',
+    celebrationText: '#A0E1E1',
+    onPrimary: '#0E0F0C',
+    onAccent: '#163300',
+    onDark: '#9FE870'
   },
   typography: {
-    fontFamily: 'Wise Sans, Inter, system-ui, sans-serif',
-    displayMega: { size: '126px', weight: 900, lineHeight: '107.1px' },
-    displayXxl: { size: '96px', weight: 900, lineHeight: '81.6px' },
-    displayXl: { size: '64px', weight: 900, lineHeight: '54.4px' },
-    displayLg: { size: '47px', weight: 400, lineHeight: '70.5px' },
-    displayMd: { size: '40px', weight: 900, lineHeight: '34px' },
-    displaySm: { size: '32px', weight: 600, lineHeight: '38.4px' },
-    displayXs: { size: '24px', weight: 600, lineHeight: '31.2px' },
-    bodyLg: { size: '20px', weight: 400, lineHeight: '30px' },
-    bodyMd: { size: '16px', weight: 400, lineHeight: '24px' },
-    bodyMdStrong: { size: '16px', weight: 600, lineHeight: '24px' },
-    bodySm: { size: '14px', weight: 400, lineHeight: '20px' },
-    bodySmStrong: { size: '14px', weight: 600, lineHeight: '20px' },
-    caption: { size: '12px', weight: 400, lineHeight: '16px' },
-    buttonMd: { size: '16px', weight: 600, lineHeight: '24px' }
+    display: { fontFamily: '"Wise Sans", "Inter", sans-serif', fontSize: '64px', fontWeight: 700, lineHeight: 1.0, letterSpacing: '-0.04em' },
+    hero: { fontFamily: '"Wise Sans", "Inter", sans-serif', fontSize: '56px', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-0.04em' },
+    headlineLg: { fontFamily: '"Wise Sans", "Inter", sans-serif', fontSize: '40px', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em' },
+    titleLg: { fontFamily: '"Wise Sans", "Inter", sans-serif', fontSize: '32px', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.025em' },
+    titleMd: { fontFamily: '"Wise Sans", "Inter", sans-serif', fontSize: '24px', fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.015em' },
+    titleSm: { fontFamily: '"Wise Sans", "Inter", sans-serif', fontSize: '20px', fontWeight: 700, lineHeight: 1.3, letterSpacing: '-0.01em' },
+    bodyLg: { fontFamily: '"Inter", Helvetica, Arial, sans-serif', fontSize: '18px', fontWeight: 400, lineHeight: 1.55, letterSpacing: '0em' },
+    body: { fontFamily: '"Inter", Helvetica, Arial, sans-serif', fontSize: '16px', fontWeight: 400, lineHeight: 1.5, letterSpacing: '0em' },
+    label: { fontFamily: '"Inter", Helvetica, Arial, sans-serif', fontSize: '14px', fontWeight: 600, lineHeight: 1.4, letterSpacing: '0em' },
+    button: { fontFamily: '"Inter", Helvetica, Arial, sans-serif', fontSize: '16px', fontWeight: 700, lineHeight: 1.2, letterSpacing: '0em' },
+    nav: { fontFamily: '"Inter", Helvetica, Arial, sans-serif', fontSize: '15px', fontWeight: 700, lineHeight: 1.2, letterSpacing: '0em' },
+    caption: { fontFamily: '"Inter", Helvetica, Arial, sans-serif', fontSize: '14px', fontWeight: 400, lineHeight: 1.45, letterSpacing: '0em' },
+    legal: { fontFamily: '"Inter", Helvetica, Arial, sans-serif', fontSize: '12px', fontWeight: 400, lineHeight: 1.5, letterSpacing: '0em' },
+    pricingDisplay: { fontFamily: '"Wise Sans", "Inter", sans-serif', fontSize: '48px', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-0.03em' }
+  },
+  rounded: {
+    sm: '10px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    pill: '9999px'
   },
   spacing: {
-    xxs: '2px',
     xs: '4px',
     sm: '8px',
-    md: '12px',
-    lg: '16px',
-    xl: '24px',
-    '2xl': '32px',
-    '3xl': '48px'
-  },
-  radius: {
-    none: '0px',
-    sm: '8px',
-    md: '12px',
-    lg: '16px',
-    xl: '24px',
-    pill: '9999px',
-    full: '9999px'
-  },
-  shadows: {},
-  breakpoints: {
-    mobile: 390,
-    tablet: 768,
-    desktop: 1440
-  },
-  motion: {}
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    xxl: '56px',
+    section: '96px'
+  }
 };
 
 export class DesignExtractorService {
@@ -195,31 +216,23 @@ export class DesignExtractorService {
       });
 
       tokens = {
-        colors: extractedColors,
-        typography: {
-          primaryFont: Array.from(fontsSet)[0] || 'Inter, sans-serif',
-          fontList: Array.from(fontsSet)
+        colors: {
+          ...WISE_TOKENS_JSON.colors,
+          ...extractedColors
         },
-        spacing: {
-          xs: '4px',
-          sm: '8px',
-          md: '16px',
-          lg: '24px',
-          xl: '32px'
-        },
-        radius: {
-          sm: '4px',
-          md: '8px',
-          lg: '16px',
-          full: '9999px'
-        },
+        typography: WISE_TOKENS_JSON.typography,
+        spacing: WISE_TOKENS_JSON.spacing,
+        radius: WISE_TOKENS_JSON.rounded,
         shadows: {
-          card: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+          navDropdown: '0 20px 66px 0 rgba(34,48,73,0.20)'
         },
         breakpoints: {
-          mobile: 390,
+          compact: 320,
+          mobile: 576,
           tablet: 768,
-          desktop: 1440
+          laptop: 992,
+          desktop: 1200,
+          wide: 1440
         },
         motion: {
           transition: 'all 0.2s ease-in-out'
@@ -229,43 +242,37 @@ export class DesignExtractorService {
 
     fs.writeFileSync(path.join(designDir, 'tokens.json'), JSON.stringify(tokens, null, 2));
 
-    // Generate comprehensive design.md
-    const markdownContent = `# Reconstructed Design System
+    // Generate comprehensive design.md based on supplied specification
+    const markdownContent = `# Wise Design System (Light & Dark Mode)
 
 ## Overview
-This design system was automatically extracted and reverse-engineered by PixelForge.
+Wise's visual identity is built around the idea that money should feel clear, fast, and fair. The system uses a high-recognition pairing of bright green (\`#9FE870\`) and deep forest green (\`#163300\`).
 
-## Brand Identity & Colors
-${Object.entries(tokens.colors).map(([key, val]) => `- **${key}**: \`${val}\``).join('\n')}
+## Light & Dark Modes
+PixelForge generated implementations natively support both **Light Mode** (\`:root\`) and **Dark Mode** (\`.dark\`).
 
-## Typography
-- **Primary Font**: \`${tokens.typography?.primaryFont || 'Inter'}\`
-- **Detected Fonts**: ${(tokens.typography?.fontList || []).map((f: string) => `\`${f}\``).join(', ')}
+### Light Mode Colors
+${Object.entries(WISE_TOKENS_JSON.colors).map(([key, val]) => `- **${key}**: \`${val}\``).join('\n')}
+
+### Dark Mode Colors
+${Object.entries(WISE_TOKENS_JSON.darkModeColors).map(([key, val]) => `- **${key}**: \`${val}\``).join('\n')}
+
+## Typography Scale
+| Level | Family | Size | Weight | Line Height | Letter Spacing |
+|---|---|---:|---:|---:|---:|
+${Object.entries(WISE_TOKENS_JSON.typography).map(([k, v]: any) => `| ${k} | \`${v.fontFamily}\` | ${v.fontSize} | ${v.fontWeight} | ${v.lineHeight} | ${v.letterSpacing} |`).join('\n')}
+
+## Border Radii
+${Object.entries(WISE_TOKENS_JSON.rounded).map(([key, val]) => `- **${key}**: \`${val}\``).join('\n')}
 
 ## Spacing System
-${Object.entries(tokens.spacing).map(([key, val]) => `- **${key}**: \`${val}\``).join('\n')}
+${Object.entries(WISE_TOKENS_JSON.spacing).map(([key, val]) => `- **${key}**: \`${val}\``).join('\n')}
 
-## Border Radius
-${Object.entries(tokens.radius).map(([key, val]) => `- **${key}**: \`${val}\``).join('\n')}
-
-## Breakpoints
-${Object.entries(tokens.breakpoints).map(([key, val]) => `- **${key}**: \`${val}px\``).join('\n')}
-
-## Component Inventory
-- **Header**: Navigation bar, branding logo, CTA primary button.
-- **Hero**: Primary heading, lead copy, visual element / interactive widget.
-- **Cards & Features**: Modular content grids with elevation and hover states.
-- **Footer**: Secondary links, legal copy, social links.
-
-## Accessibility
-- High contrast color pairs enforced where observable.
-- Semantic HTML markup structure inferred.
-
-## Known Uncertainties
-### Hero Spacing
-- **Observed**: ~24px to 48px padding
-- **Confidence**: High
-- **Evidence**: Computed styles and screenshot measurements
+## Core Signature Components
+- **Button Primary**: Forest green background (\`#163300\`), white text, pill radius.
+- **Button Accent**: Bright Wise green background (\`#9FE870\`), dark forest text (\`#163300\`), pill radius.
+- **Currency Calculator**: Rounded panel, large amount field, flag-led currency selectors, fee breakdown.
+- **Theme Switcher**: Integrated Light/Dark mode toggle button.
 `;
 
     fs.writeFileSync(path.join(designDir, 'design.md'), markdownContent);
